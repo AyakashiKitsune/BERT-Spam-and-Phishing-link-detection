@@ -67,7 +67,7 @@ def predict(messages: list[str]):
             "is_spam": spam_result_decode(is_spam_result[i][0]),
             "has_profanity": has_profanityword(messages[i]),
             "links_found": [
-                {"link": link, "isfraud confidence": is_link_phish(link)}
+                {"link": link, "isfraud_confidence": is_link_phish(link)}
                 for link in findall_links(messages[i])
             ],
         }
@@ -88,7 +88,7 @@ def predict(messages: list[str]):
             }
         ]
     },] """
-    req = json.dumps(response)
+    req = jsonify(response)
     # print(response)
     return req
 
@@ -136,7 +136,7 @@ def filter_and_replace_punctuations(text):
     return filtered_text
 
 
-@app.route("/")
+@app.route("/",methods=["POST"])
 def spam_check():
     json = request.json
     message = [*json["message"]]

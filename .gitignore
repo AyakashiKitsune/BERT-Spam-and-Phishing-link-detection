@@ -2,3 +2,5 @@ bert_models
 checkpoints
 experiments
 models
+env
+.vscode
